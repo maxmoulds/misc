@@ -30,6 +30,9 @@ rm -- "$title_name"
 while read p; do
   intheloop="$(pwd $p)"
   echo "${p##*/}" >> "$title_name"
+#adding in md5 for duplicate file names
+  md5=$(cat $intheloop/md5sum | egrep "*${p##*/}*" | egrep -o "[0-9a-f]{32}")
+  echo "$md5"
   for_mediainfo="$intheloop${p:1}"
   write_mediainfo="$OUT_DIR/${p##*/}-mediainfo.info"
   touch "$write_mediainfo"
