@@ -6,7 +6,7 @@
 #DIRECTORY="/path/to/dir"
 #cd "$DIRECTORY" || exit 1
 
-ext="mp4"
+ext="mkv"
 shopt -s nullglob
 echo "$PWD"
 
