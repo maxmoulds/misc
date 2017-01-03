@@ -40,7 +40,8 @@ make distclean
 cd "$SRC"
 $($X265_REPO)
 cd ./x265/build/linux
-PATH="$HOME/bin:$PATH" cmake -G "Unix Makefiles" -DHIGH_BIT_DEPTH=ON -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED:bool=off ../../source
+#PATH="$HOME/bin:$PATH"
+cmake -G "Unix Makefiles" -DHIGH_BIT_DEPTH=ON -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED:bool=off ../../source
 make
 make install
 make distclean
