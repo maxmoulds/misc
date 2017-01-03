@@ -29,8 +29,10 @@ wget "$FFMPEG_REPO"
 #x264
 tar xjvf last_x264.tar.bz2
 cd x264-snapshot*
-PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static --bit-depth=10
-PATH="$HOME/bin:$PATH" make
+#PATH="$HOME/bin:$PATH"
+./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static --enable-pic --bit-depth=10
+#PATH="$HOME/bin:$PATH" 
+make
 make install
 make distclean
 
@@ -91,6 +93,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --extra-cflags="-I$HOME/ffmpeg_build/include" \
   --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
   --bindir="$HOME/bin" \
+  --enable-shared \
   --enable-gpl \
   --enable-libass \
   --enable-libfdk-aac \
