@@ -25,6 +25,10 @@ set showmatch
 set backspace=1
 syntax on 
 
+" more backspace workarounds
+set backspace=indent,eol,start
+
+
 set cinoptions=:0,p0,t0
 set cinwords=if,unless,else,while,until,do,for,switch,case
 set formatoptions=tcqr
@@ -38,35 +42,35 @@ set cindent
 " set wildmenu	
 
 "auto header entry for c files
-autocmd bufnewfile *.c so ~/Desktop/code/cur/back/vim/vim/c_header.txt
-autocmd bufnewfile *.c exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
-autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.c execute "normal ma"
-autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
-autocmd bufwritepost,filewritepost *.c execute "normal `a"
+"autocmd bufnewfile *.c so ~/Desktop/code/cur/back/vim/vim/c_header.txt
+"autocmd bufnewfile *.c exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
+"autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
+"autocmd Bufwritepre,filewritepre *.c execute "normal ma"
+"autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
+"autocmd bufwritepost,filewritepost *.c execute "normal `a"
 
-autocmd bufnewfile *.h so ~/Desktop/code/cur/back/vim/vim/c_header.txt
-autocmd bufnewfile *.h exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
-autocmd bufnewfile *.h exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.h execute "normal ma"
-autocmd Bufwritepre,filewritepre *.h exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
-autocmd bufwritepost,filewritepost *.h execute "normal `a"
+"autocmd bufnewfile *.h so ~/Desktop/code/cur/back/vim/vim/c_header.txt
+"autocmd bufnewfile *.h exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
+"autocmd bufnewfile *.h exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
+"autocmd Bufwritepre,filewritepre *.h execute "normal ma"
+"autocmd Bufwritepre,filewritepre *.h exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
+"autocmd bufwritepost,filewritepost *.h execute "normal `a"
 
 "auto header entry for tex files"
-autocmd bufnewfile *.tex so ~/Desktop/code/cur/back/vim/vim/tex_header.txt
-autocmd bufnewfile *.tex exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
-autocmd bufnewfile *.tex exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.tex execute "normal ma"
-autocmd Bufwritepre,filewritepre *.tex exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
-autocmd bufwritepost,filewritepost *.tex execute "normal `a"
+"autocmd bufnewfile *.tex so ~/Desktop/code/cur/back/vim/vim/tex_header.txt
+"autocmd bufnewfile *.tex exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
+"autocmd bufnewfile *.tex exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
+"autocmd Bufwritepre,filewritepre *.tex execute "normal ma"
+"autocmd Bufwritepre,filewritepre *.tex exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
+"autocmd bufwritepost,filewritepost *.tex execute "normal `a"
 
 "auto header entry for py files"
-autocmd bufnewfile *.py so ~/Desktop/code/cur/back/vim/vim/py_header.txt
-autocmd bufnewfile *.py exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
-autocmd bufnewfile *.py exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.py execute "normal ma"
-autocmd Bufwritepre,filewritepre *.py exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
-autocmd bufwritepost,filewritepost *.py execute "normal `a"
+"autocmd bufnewfile *.py so ~/Desktop/code/cur/back/vim/vim/py_header.txt
+"autocmd bufnewfile *.py exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
+"autocmd bufnewfile *.py exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
+"autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+"autocmd Bufwritepre,filewritepre *.py exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
+"autocmd bufwritepost,filewritepost *.py execute "normal `a"
 
 "This is added to turn on highlighting in vim for tex files"
 set t_Co=256
