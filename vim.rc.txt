@@ -22,7 +22,7 @@ set number		" number lines
 set nocompatible
 set incsearch
 set showmatch
-set backspace=1
+set backspace=2 " should work, so should the set backspace=indent,eol,start
 syntax on 
 
 " more backspace workarounds
