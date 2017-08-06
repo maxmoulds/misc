@@ -125,6 +125,13 @@ set sw=2
 " all the figure labels. Very useful!
 set iskeyword+=:
 
+" adding keyboard alt-<arrow> for ctrl-w replacement in chrome
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
+
 " END VIM INFO ##
 " UPDATED
 " 20:39 - 06/26/13 - MM
