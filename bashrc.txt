@@ -57,11 +57,14 @@ alias nano='edit'
 alias snano='sedit'
 
 #custom alias gr
-alias mqstat='qstat -a -u mtmoulds'
-alias qstatm='qstat -a -u mtmoulds'
-alias mhome='ssh max@local.apartment.maxmoulds.net'
-alias sweephomepng="rsync -r *.png max@local.apartment.maxmoulds.net:img/$(date --rfc-3339=ns | cut -d' ' -f1)/"
+#alias mqstat='qstat -a -u mtmoulds'
+#alias qstatm='qstat -a -u mtmoulds'
+#alias mhome='ssh max@local.apartment.maxmoulds.net'
+#alias sweephomepng="rsync -r *.png max@local.apartment.maxmoulds.net:img/$(date --rfc-3339=ns | cut -d' ' -f1)/"
 #alias tester="echo $(date --rfc-3339=ns | cut -d' ' -f1)"
+
+#chromeos stuffs
+alias cvim="sudo enter-chroot -b -n xenial xiwi -T xfce4-terminal && exit && exit"
 
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
 export CLICOLOR=1
