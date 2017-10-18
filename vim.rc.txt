@@ -154,6 +154,12 @@ endfunction
 au BufWritePost * call CommitFile()
 
 
+
+
+
+
+
+
 " END VIM INFO ##
 " UPDATED
 " 20:39 - 06/26/13 - MM

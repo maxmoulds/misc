@@ -64,7 +64,7 @@ alias snano='sedit'
 #alias tester="echo $(date --rfc-3339=ns | cut -d' ' -f1)"
 
 #chromeos stuffs
-alias cvim="sudo enter-chroot -b -n xenial xiwi -T xfce4-terminal && exit && exit"
+alias cvim="sudo enter-chroot -b -n xenial xiwi -T xfce4-terminal && sleep 1 && exit && exit"
 
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
 export CLICOLOR=1
@@ -580,6 +580,25 @@ trim()
 	var="${var%"${var##*[![:space:]]}"}"  # remove trailing whitespace characters
 	echo -n "$var"
 }
+
+# Wrap xiwi so that aliases work
+xiwi() {
+    local xiwiargs=''
+    while [ "${1#-}" != "$1" ]; do
+        xiwiargs="$xiwiargs $1"
+        shift
+    done
+    local cmd="`alias "$1" 2>/dev/null`"
+    if [ -z "$cmd" ]; then
+        cmd="$1"
+    else
+        eval "cmd=${cmd#*=}"
+        cmd="env $cmd"
+    fi
+    shift
+    eval "/usr/local/bin/xiwi $xiwiargs $cmd \"\$@\""
+}
+
 
 #######################################################
 # Set the ultimate amazing command prompt
