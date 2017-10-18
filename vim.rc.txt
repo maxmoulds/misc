@@ -1,3 +1,10 @@
+runtime! debian.vim
+
+if has("syntax")
+  syntax on
+endif
+
+
 
 " GENERAL OPTIONS
 behave xterm
@@ -23,7 +30,6 @@ set nocompatible
 set incsearch
 set showmatch
 set backspace=2 " should work, so should the set backspace=indent,eol,start
-syntax on 
 
 " more backspace workarounds
 set backspace=indent,eol,start
@@ -130,6 +136,22 @@ nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
+
+" requires vim-python and python-git
+function! CommitFile()
+python << EOF
+import vim, git 
+curfile = vim.current.buffer.name
+if curfile:
+    try:
+        repo = git.Repo(curfile)
+        repo.git.add(curfile)
+        repo.git.commit(m='Update')
+    except (git.InvalidGitRepositoryError, git.GitCommandError):
+        pass
+EOF
+endfunction
+au BufWritePost * call CommitFile()
 
 
 " END VIM INFO ##
