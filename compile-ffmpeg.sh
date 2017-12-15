@@ -13,6 +13,7 @@ VPX_REPO="http://storage.googleapis.com/downloads.webmproject.org/releases/webm/
 
 function main() {
 #something
+export MAKEFLAGS="-j4"
 mkdir -p "$SRC"
 cd "$SRC"
 
@@ -96,7 +97,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --bindir="$HOME/bin" \
   --enable-shared \
   --enable-gpl \
-  --enable-libass \
+#  --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
