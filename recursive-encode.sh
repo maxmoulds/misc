@@ -81,7 +81,176 @@ do
     #regular - testing film grain - minus rd specs 
     logvv "$(date) Recoding...."
 #start command
-( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 -c:v libx265 -preset medium -sws_flags lanczos -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+	ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+	-map_metadata 0 -map_chapters 0 -c:v \
+	libx265 -preset medium \
+	-x265-params pass=1:crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+	-pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+	-y /dev/null \
+	#"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+	) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset medium \
+        -x265-params pass=2:crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset medium \
+        -x265-params pass=1:crf=0:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset medium \
+        -x265-params pass=2:crf=0:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-crf0-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset medium -sws_flags lanczos \
+        -x265-params pass=1:preset=medium:profile=main10:deblock=-6,-6:crf=0:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset medium -sws_flags lanczos \
+        -x265-params pass=2:preset=medium:profile=main10:deblock=-6,-6:crf=0:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-winsoln-and-old-lanczos-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow \
+        -x265-params pass=1:preset=medium:profile=main10:deblock=-6,-6:no-strong-intra-smoothing=1:tune=grain \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow \
+        -x265-params pass=2:preset=medium:profile=main10:deblock=-6,-6:no-strong-intra-smoothing=1:tune=grain \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-winsoln-slow-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow \
+        -x265-params pass=1:preset=medium:profile=main10 \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow \
+        -x265-params pass=2:preset=medium:profile=main10 \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-vanilla-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=1:preset=medium:profile=main10:tune=grain \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=2:preset=medium:profile=main10:tune=grain \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-vanilla-lanczos-medium-tune-grain$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=1:preset=medium:profile=main10:tune=film \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=2:preset=medium:profile=main10:tune=film \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-vanilla-lanczos-medium-tune-film$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+#start command
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=1:preset=medium:profile=main10:tune=grain,film \
+        -pass 1 -an -pix_fmt yuv422p10le -c:a copy -c:s copy -f rawvideo \
+        -y /dev/null \
+        #"$VIDRUN_DIR/2pass-old-$filename$GRP_NAME.$OUTPUT_DIR_EXT.hevc"
+        ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC" &&
+#run 2
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && \
+        ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) \
+        -map_metadata 0 -map_chapters 0 -c:v \
+        libx265 -preset slow -sws_flags lanczos \
+        -x265-params pass=2:preset=medium:profile=main10:tune=grain,film \
+        -pass 2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska \
+        "$VIDRUN_DIR/2pass-vanilla-lanczos-medium-tune-grainandfilm$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+
+#end command
+
+
+#start command
+#( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 -c:v libx265 -preset medium -sws_flags lanczos -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$VIDRUN_DIR/lanczos-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+#end command
+#start command
+#( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 -c:v libx265 -preset medium -sws_flags lanczos -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=film -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$VIDRUN_DIR/tune-film-lanczos-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+#end command
+#start command
+#( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 -c:v libx265 -preset medium -sws_flags lanczos -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$VIDRUN_DIR/preset-medium-lancos-$filename$GRP_NAME.$OUTPUT_DIR_EXT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
 #end command
     
    #start command
