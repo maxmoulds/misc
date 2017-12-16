@@ -23,7 +23,8 @@ MEDIAINFO_CMD_HTML="mediainfo -f --Output=HTML "
 MEDIAINFO_CMD_XML="mediainfo -f --Output=XML "
 FFMPEG_CMD="ffmpeg -i "
 OUTPUT_DIR_EXT=mkv # -f
-DURATION=""  #"" # -t in seconds, 0 for whole length
+STARTING_FRAME_SECONDS="120"
+DURATION="240" #used as ending, grrr.   #"" # -t in seconds, 0 for whole length
 DEFAULT_REPORT_TYPE=0
 
 function main () {
@@ -80,9 +81,13 @@ do
     #regular - testing film grain - minus rd specs 
     logvv "$(date) Recoding...."
 #start command
-    ( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" $DURATION -map_metadata 0 -map_chapters 0 \
--c:v libx265 -preset medium -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
--pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" -ss $STARTING_FRAME_SECONDS -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 -c:v libx265 -preset medium -sws_flags lanczos -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+#end command
+    
+   #start command
+#    ( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" $DURATION -map_metadata 0 -map_chapters 0 \
+#-c:v libx265 -preset medium -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+#-pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
 #end command
     logvv "$(date) Making images from result"
     #make images
@@ -97,6 +102,14 @@ do
     # $1 - vid_loc #includes name
     # $2 - log_loc #includes name
     # $3 - rep_type [0-3] 
+
+#command used before 17-12-15
+#start command
+#    ( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i "$INPUT_DIR/$FILE" $DURATION -map_metadata 0 -map_chapters 0 \
+#-c:v libx265 -preset medium -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+#-pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+#end command
+
 
     
     #adding -map 0 -c copy : to copy all channels subtitles and streams, we will select one video channel laters(?)
@@ -120,6 +133,18 @@ do
     #(time (export FFREPORT=file="$OUTPUT_DIR/$filename-RECODE-exp.log" && ffmpeg -report -i "$INPUT_DIR/$FILE" -map_metadata 0 -map_chapters 0 -c:v libx265 -preset slower -x265-params wpp=1:ctu=64:min-cu-size=8:max-tu-size=32:tu-intra-depth=1:tu-inter-depth=1:me=1:subme=2:merange=57:no-rect=1:no-amp=1:max-merge=2:temporal-mvp=1:no-early-skip=1:rdpenalty=0:no-tskip=1:no-tskip-fast=1:strong-intra-smoothing=1:no-lossless=1:no-cu-lossless=1:no-constrained-intra=1:no-fast-intra=1:open-gop=1:no-temporal-layers=1:interlace=0:keyint=250:min-keyint=23:scenecut=40:rc-lookahead=20:lookahead-slices=0:bframes=4:bframe-bias=0:b-adapt=2:ref=3:limit-refs=0:weightp=1:no-weightb=1:aq-mode=1:qg-size=32:aq-strength=0.30:cbqpoffs=0:crqpoffs=0:rd=3:psy-rd=0.50:rdoq-level=2:psy-rdoq=10.00:signhide=1:deblock="-2:-2":sao=1:no-sao-non-deblock=1:b-pyramid=1:cutree=1:qpmax=51:qpmin=0:qcomp=0.80:cplxblur=20.0:qpstep=4:qblur=0.5:ipratio=1.10:pbratio=1.10 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska -t 240 "$OUTPUT_DIR/$filename-RECODE-exp.$OUTPUT_DIR_EXT" )) > $OUTPUT_DIR/$filename-RECODE-exp.log_ffmpeg 2> $OUTPUT_DIR/$filename-RECODE-exp.log_time
 
     #(time (export FFREPORT=file="$OUTPUT_DIR/$filename-RECODE-littlepox.log" && ffmpeg -report -i "$INPUT_DIR/$FILE" -map 0 -c copy -map_metadata 0 -map_chapters 0 -c:v libx265 -preset slower -x256-params ctu=32:max-tu-size=16:crf=19:tu-intra-depth=2:tu-inter-depth=2:rdpenalty=2:me=3:subme=5:merange=44:no-rect=1:b-intra=1:no-amp=1:ref=5:weightb=1:keyint=360:min-keyint=1:bframes=8:aq-mode=1:aq-strength=1:rd=5:psy-rd=1.5:psy-rdoq=5.0:rdoq-level=1:no-sao=1:no-open-gop=1:rc-lookahead=80:max-merge=4:qcomp=0.8:no-strong-intra-smoothing=1:deblock="-2:-2":qg-size=16:pbratio=1.2 -pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$OUTPUT_DIR/$filename-RECODE-littlepox.$OUTPUT_DIR_EXT")) > $OUTPUT_DIR/$filename-RECODE-littlepox.log_ffmpeg 2> $OUTPUT_DIR/$filename-RECODE-littlepox.log_time
+
+#testing 17-12-15
+## adding lanczos(sp) filter/scaler, also, libass is "broken". 
+#  -sws_flags lanczos
+#start command
+#logvv "$(($STARTING_FRAME_SECONDS + $DURATION))"
+#( time ( export FFREPORT=file="$FFMPEG_LOG_LOC" && ffmpeg -report -i -ss $STARTING_FRAME_SECONDS "$INPUT_DIR/$FILE" -to $(($STARTING_FRAME_SECONDS + $DURATION)) -map_metadata 0 -map_chapters 0 \
+#-c:v libx265 -preset medium -sws_flags lanczos -x265-params crf=22.8:limit-refs=3:rd=5:psy-rd=0:psy-rdoq=50:qg-size=32:psy-rd=0:no-rd-define=1:no-intra-refres=1:tune=grain \
+#-pix_fmt yuv422p10le -c:a copy -c:s copy -f matroska "$DEST_OUTPUT" ) &> "$SCRIPT_LOG_LOC" ) &> "$TIME_LOG_LOC"
+#end command
+
+
 
     ##so this command finds all 'lines' that are accepted 'files'
     ## cat "$DATABASE" | egrep "\.("$FILETYPES")$" >> $TITLE_DB
