@@ -24,7 +24,7 @@ set shiftwidth=3	" sw, number of spaces shifted left and righ when issuing << an
 			"  commands
 set softtabstop=3
 set expandtab
-set textwidth=80
+" set textwidth=80
 set number		" number lines
 set nocompatible
 set incsearch
