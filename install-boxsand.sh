@@ -23,6 +23,7 @@ init_environment="0"
 rbenv_repo="https://github.com/rbenv/rbenv.git"
 ruby_build_repo="https://github.com/rbenv/ruby-build.git"
 ruby_version="2.2.3"
+ruby_version2="2.4.2"
 #this var is weird. i need a way to get back home. work out later.
 #_SRC_DIR=.
 #source $_SRC_DIR/src-log.sh
@@ -194,13 +195,15 @@ function tutor_rbenv_ruby_install() {
   log "in the directory (should be tutor-server repo) : $PWD"
   export RUBY_CONFIGURE_OPTS=--disable-install-doc
   CONFIGURE_OPTS="--disable-install-rdoc" rbenv install "$ruby_version" #2.2.3
+  CONFIGURE_OPTS="--disable-install-rdoc" rbenv install "$ruby_version2"
   #or -- RUBY_CONFIGURE_OPTS=--disable-install-doc [rbenv...]
-  seeurce ~/.bashrc && source ~/.profile
+  #seeurce ~/.bashrc && source ~/.profile
   rbenv init
   grep -q -F 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-  source ~/.bashrc && source ~/.profile
+  #source ~/.bashrc && source ~/.profile
   grep -q -F 'eval "$(rbenv init -)"' ~/.bashrc || echo 'eval "$(rbenv init -)"' >> ~/.bashrc 
-  source ~/.bashrc && source ~/.profile
+  #source ~/.bashrc && source ~/.profile
+  log "done installing ruby.... yaay...."
 
 }
 
