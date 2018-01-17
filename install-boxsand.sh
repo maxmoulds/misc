@@ -24,6 +24,7 @@ rbenv_repo="https://github.com/rbenv/rbenv.git"
 ruby_build_repo="https://github.com/rbenv/ruby-build.git"
 ruby_version="2.2.3"
 ruby_version2="2.4.2"
+ruby_version_accounts="2.3.3" #AHHHHH
 #this var is weird. i need a way to get back home. work out later.
 #_SRC_DIR=.
 #source $_SRC_DIR/src-log.sh
@@ -31,19 +32,19 @@ ruby_version2="2.4.2"
 
 function main() {
   log "CWD = $cwd, or .. $(pwd)"
-  install_environment_ubuntu
-  clone_repos
-  rbenv_install_ubuntu
-  ruby-build_install_ubuntu
+  #install_environment_ubuntu
+  #clone_repos
+  #rbenv_install_ubuntu
+  #ruby-build_install_ubuntu
   log "ruby ish done?.."
-  postgres_install_ubuntu
-  redis_install_ubuntu
-  postgresboxsand_config
-  redis_boxsand_config
+  #postgres_install_ubuntu
+  #redis_install_ubuntu
+  #postgres_boxsand_config
+  #redis_boxsand_config
 
   log "INSTALL/CONFIG tutor-server..."
-  tutor_server_install
-  tutor_server_config
+  #tutor_server_install
+  #tutor_server_config
 
   log "DONE?...$?..."
 }
@@ -62,7 +63,8 @@ function install_environment_ubuntu() {
       libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev \
       libxslt1-dev libcurl4-openssl-dev python-software-properties \
       ruby-dev libffi-dev libevent-dev python-virtualenv \
-      htop
+      gcc-5 htop \
+
 #     rbenv ruby-build
   fi
   #also need nvm...
@@ -80,15 +82,16 @@ function clone_repos() {
   git clone https://github.com/openstax/os-webview
   git clone https://github.com/openstax/pattern-library
   git clone https://github.com/openstax/exercises
-  #git clone https://github.com/openstax/exercises-js.git
+  git clone https://github.com/openstax/exercises-js.git
   git clone https://github.com/Connexions/cnx-db
   git clone https://github.com/Connexions/cnx-archive
   git clone https://github.com/Connexions/cnx-recipes
   git clone https://github.com/Connexions/cnx-deploy.git
-  #git clone https://github.com/Connexions/webview
+  git clone https://github.com/Connexions/webview
   git clone https://github.com/openstax/accounts.git
   git clone https://github.com/openstax/hypothesis-deployment.git
   git clone https://github.com/openstax/hypothesis-server.git
+  git clone https://github.com/openstax/hypothesis-client.git
 }
 
 function rbenv_install_ubuntu() {
@@ -211,7 +214,7 @@ function tutor_bundler_install() {
   cd "$cwd"
   cd ./tutor-server
   log "gem install bundler..."
-  #sudo gem install bundler
+  gem install bundler
   rbenv rehash
   log "wtf mate"
   #source ~/.bashrc && source ~/.profile
@@ -243,6 +246,13 @@ function install_accounts()
   cd ~/accounts
   log "in accounts -- $(PWD)"
   log "enter password for ox_tutor when prompted:"
+  CC=/usr/bin/gcc-5 \
+    PKG_CONFIG_PATH=/usr/lib/openssl-1.0/pkgconfig \
+    rbenv install $ruby_version_accounts #2.3.3
+  #rbenv install $ruby_version_accounts #2.3.3
+  log "need to update bundler (maybe)..."
+  gem install bundler
+  rbenv rehash
   bundle install --without production
   log "done with bundler install..."
 }
