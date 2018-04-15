@@ -731,3 +731,6 @@ function __setprompt
 	PS4='\[${DARKGRAY}\]+\[${NOCOLOR}\] '
 }
 PROMPT_COMMAND='__setprompt'
+
+#testing for stty things. 
+stty erase ^?
