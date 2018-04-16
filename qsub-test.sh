@@ -1,3 +1,0 @@
-time (old_ifs=$IFS; IFS=EOF && __MEME__=$(</home0/mtmoulds/testdir/physics/nonlinear/rslts.018000); IFS=$old_ifs && echo $__MEME__ | egrep '(*COEFS*|*PHASE*)' | while read p; do echo -ne "$p\n$(echo -n $p | egrep -o '\b^[0-9]{0,3}\s\b')"; done > /home0/mtmoulds/testdir/physics/nonlinear/rslts/coefs/test.txt) > /home0/mtmoulds/testdir/physics/nonlinear/rslts/outfile
-unset IFS
-time (cat /home0/mtmoulds/testdir/physics/nonlinear/rslts.018000 | egrep '(*COEFS*|*PHASE*)' | while read p; do echo -ne "$p\n$(echo -n $p | egrep -o '\b[0-9]{0,3}\s\b')"; done > /home0/mtmoulds/testdir/physics/nonlinear/rslts/coefs/test.txt) > /home0/mtmoulds/testdir/physics/nonlinear/rslts/outfile
