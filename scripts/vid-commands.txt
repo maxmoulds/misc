@@ -1,0 +1,28 @@
+# CHECK s14, s16, s17, s18, s19, s20 from uploadcdn
+echo "s14- $(ps aux | egrep "[s]14.uploadcdn" | wc -l)" && echo "s16- $(ps aux | egrep "[s]16.uploadcdn" | wc -l)" && echo "s17- $(ps aux | egrep "[s]17.uploadcdn" | wc -l)" && echo "s18- $(ps aux | egrep "[s]18.uploadcdn" | wc -l)" && echo "s19- $(ps aux | egrep "[s]19.uploadcdn" | wc -l)" && echo "s20- $(ps aux | egrep "[s]20.uploadcdn" | wc -l)" && echo "total- $(ps aux | grep "[w]get" | wc -l)"
+
+# NEWer one 1/19/16
+echo "s14- $(ps aux | egrep "[s]14.uploadcdn" | wc -l)" && echo "s16- $(ps aux | egrep "[s]16.uploadcdn" | wc -l)" && echo "s17- $(ps aux | egrep "[s]17.uploadcdn" | wc -l)" && echo "s18- $(ps aux | egrep "[s]18.uploadcdn" | wc -l)" && echo "s19- $(ps aux | egrep "[s]19.uploadcdn" | wc -l)" && echo "s20- $(ps aux | egrep "[s]20.uploadcdn" | wc -l)" && echo "Clicknupload-f02- $(ps aux | egrep "[f]s02.clicknupload" | wc -l)" && echo "Clicknupload-f03- $(ps aux | egrep "[f]s03.clicknupload" | wc -l)" && echo "Clicknupload-f04 $(ps aux | egrep "[f]s04.clicknupload" | wc -l)" && echo "Clicknupload-f05- $(ps aux | egrep "[f]s05.clicknupload" | wc -l)" && echo "Clicknupload-f06- $(ps aux | egrep "[f]s06.clicknupload" | wc -l)" && echo "Clicknupload-f09- $(ps aux | egrep "[f]s09.clicknupload" | wc -l)" && echo "Clicknupload-f11- $(ps aux | egrep "[f]s11.clicknupload" | wc -l)" && echo "Clicknupload-f14 $(ps aux | egrep "[f]s14.clicknupload" | wc -l)" && echo "Clicknupload-f15- $(ps aux | egrep "[f]s15.clicknupload" | wc -l)" && echo "Clicknupload-f16 $(ps aux | egrep "[f]s16.clicknupload" | wc -l)" && echo "Clicknupload-f24- $(ps aux | egrep "[f]s24.clicknupload" | wc -l)" && echo "total Clicknupload- $(ps aux | egrep "[c]licknupload" | wc -l)" && echo "tusfiles-i- $(ps aux | egrep "[i].tusfiles" | wc -l)" && echo "tusfiles-s- $(ps aux | egrep "[s].tusfiles" | wc -l)" && echo "tusfiles-m- $(ps aux | egrep "[m].tusfiles" | wc -l)" && echo "tusfiles-o- $(ps aux | egrep "[o].tusfiles" | wc -l)" && echo "tusfiles-k- $(ps aux | egrep "[k].tusfiles" | wc -l)" && echo "tusfiles-r- $(ps aux | egrep "[r].tusfiles" | wc -l)" && echo "tusfiles-p- $(ps aux | egrep "[p].tusfiles" | wc -l)" && echo "tusfiles-f- $(ps aux | egrep "[f].tusfiles" | wc -l)" && echo "tusfiles-n- $(ps aux | egrep "[n].tusfiles" | wc -l)" && echo "tusfiles-t- $(ps aux | egrep "[t].tusfiles" | wc -l)" && echo "tusfiles-dl- $(ps aux | egrep "[d]l.tusfiles" | wc -l)" && echo "kingfiles- $(ps aux | egrep "[k]ingfiles" | wc -l)" && echo "total- $(ps aux | grep "[w]get" | wc -l)"
+
+searching ---
+find /media/max/vid/16-1-13-mov-sorted/SORTED/ /media/max/MOV-DUMP/16-1-11-mov-sorted/SORTED/ /media/max/MOV-DUMP/VIDEO/MOVIES/*/ -maxdepth 1 -type d | egrep -o "[^/]+$"
+
+
+
+
+
+echo "s14- $(ps aux | egrep "[s]14.uploadcdn" | wc -l)" && echo "s16- $(ps aux | egrep "[s]16.uploadcdn" | wc -l)" && echo "s17- $(ps aux | egrep "[s]17.uploadcdn" | wc -l)" && echo "s18- $(ps aux | egrep "[s]18.uploadcdn" | wc -l)" && echo "s19- $(ps aux | egrep "[s]19.uploadcdn" | wc -l)" && echo "s20- $(ps aux | egrep "[s]20.uploadcdn" | wc -l)" && echo "total uploadcdn- $(ps aux | egrep "[u]ploadcdn" | wc -l)" && echo "Clicknupload-f02- $(ps aux | egrep "[f]s02.clicknupload" | wc -l)" && echo "Clicknupload-f03- $(ps aux | egrep "[f]s03.clicknupload" | wc -l)" && echo "Clicknupload-f04 $(ps aux | egrep "[f]s04.clicknupload" | wc -l)" && echo "Clicknupload-f05- $(ps aux | egrep "[f]s05.clicknupload" | wc -l)" && echo "Clicknupload-f06- $(ps aux | egrep "[f]s06.clicknupload" | wc -l)" && echo "Clicknupload-f09- $(ps aux | egrep "[f]s09.clicknupload" | wc -l)" && echo "Clicknupload-f11- $(ps aux | egrep "[f]s11.clicknupload" | wc -l)" && echo "Clicknupload-f14 $(ps aux | egrep "[f]s14.clicknupload" | wc -l)" && echo "Clicknupload-f15- $(ps aux | egrep "[f]s15.clicknupload" | wc -l)" && echo "Clicknupload-f16 $(ps aux | egrep "[f]s16.clicknupload" | wc -l)" && echo "Clicknupload-f24- $(ps aux | egrep "[f]s24.clicknupload" | wc -l)" && echo "total Clicknupload- $(ps aux | egrep "[c]licknupload" | wc -l)" && echo "tusfiles-i- $(ps aux | egrep "[i].tusfiles" | wc -l)" && echo "tusfiles-s- $(ps aux | egrep "[s].tusfiles" | wc -l)" && echo "tusfiles-m- $(ps aux | egrep "[m].tusfiles" | wc -l)" && echo "tusfiles-o- $(ps aux | egrep "[o].tusfiles" | wc -l)" && echo "tusfiles-k- $(ps aux | egrep "[k].tusfiles" | wc -l)" && echo "tusfiles-r- $(ps aux | egrep "[r].tusfiles" | wc -l)" && echo "tusfiles-p- $(ps aux | egrep "[p].tusfiles" | wc -l)" && echo "tusfiles-f- $(ps aux | egrep "[f].tusfiles" | wc -l)" && echo "tusfiles-n- $(ps aux | egrep "[n].tusfiles" | wc -l)" && echo "tusfiles-t- $(ps aux | egrep "[t].tusfiles" | wc -l)" && echo "tusfiles-dl- $(ps aux | egrep "[d]l.tusfiles" | wc -l)" && echo "total tusfiles- $(ps aux | egrep "[t]usfiles" | wc -l)" && echo "kingfiles- $(ps aux | egrep "[k]ingfiles" | wc -l)" && echo "hugefiles- $(ps aux | grep "[h]ugefiles" | wc -l)" && echo "uploadX- $(ps aux | egrep "[u]ploadx" | wc -l)" && echo "total- $(ps aux | grep "[w]get" | wc -l)"
+
+
+
+
+
+some really cooolness that i wasted my time on. 
+basename $(pwd) && ls --full-time | egrep "*2016-0[12]-*" | wc -l && ls | wc -l && cd ../A
+
+
+
+
+
+
+
