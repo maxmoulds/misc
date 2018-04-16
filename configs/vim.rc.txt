@@ -138,28 +138,17 @@ nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
 " requires vim-python and python-git
-function! CommitFile()
-python << EOF
-import vim, git 
-curfile = vim.current.buffer.name
-if curfile:
-    try:
-        repo = git.Repo(curfile)
-        repo.git.add(curfile)
-        repo.git.commit(m='Update')
-    except (git.InvalidGitRepositoryError, git.GitCommandError):
-        pass
-EOF
-endfunction
-au BufWritePost * call CommitFile()
-
-
-
-
-
-
-
-
-" END VIM INFO ##
-" UPDATED
-" 20:39 - 06/26/13 - MM
+" function! CommitFile()
+" python << EOF
+" import vim, git 
+" curfile = vim.current.buffer.name
+" if curfile:
+"     try:
+"         repo = git.Repo(curfile)
+"         repo.git.add(curfile)
+"         repo.git.commit(m='Update')
+"     except (git.InvalidGitRepositoryError, git.GitCommandError):
+"         pass
+" EOF
+" endfunction
+" au BufWritePost * call CommitFile()
