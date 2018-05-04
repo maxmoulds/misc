@@ -1,5 +1,16 @@
 #!/bin/bash
+
 iatest=$(expr index "$-" i)
+### bind fix for inter and non-interactive shell
+
+#iatest=$(expr index "$-" i)
+#if [[ $iatest > 0 ]]; then bind '"\e[A": history-search-backward'; fi
+#if [[ $iatest > 0 ]]; then bind '"\e[B": history-search-forward'; fi
+
+#TESTING?
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 
 #######################################################
 # SOURCED ALIAS'S AND SCRIPTS
