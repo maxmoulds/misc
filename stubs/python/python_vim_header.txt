@@ -1,32 +1,31 @@
-:insert
 """
- * File Name:
+ * File Name: test.py
  * Description:
  *
- * Creation Date:
- * Last Modified:
+ * Creation Date: 05-05-2018
+ * Last Modified: Sat 05 May 2018 02:58:19 PM PDT
  *
  * Author: Max Moulds 
  *
 """
 #!/usr/bin/python
+import sys
 
-#Creator: Max Moulds
-#Created.. i left off here...
-
-# import modules used here -- sys is a very standard one
-# import sys
-#
-# # Gather our code in a main() function
-# def main():
-#   print 'Hello there', sys.argv[1]
+def main():
+  print('Hello there', sys.argv[0])
 #     # Command line args are in sys.argv[1], sys.argv[2] ..
 #       # sys.argv[0] is the script name itself and can be ignored
 #
+
 #       # Standard boilerplate to call the main() function to begin
 #       # the program.
-#       if __name__ == '__main__':
-#         main()
+if __name__ == '__main__':
+  print("calling from own module (main)...", sys.argv[0])
+  main()
+else:
+  print("Not calling from own module...", sys.argv[0])
+  main()
+
 __author__ = "Max Moulds"
 __copyright__ = "Copyright 2018, Max Moulds"
 __credits__ = ["Max Moulds"]
@@ -35,4 +34,3 @@ __version__ = "0.1"
 __maintainer__ = "Max Moulds"
 __email__ = "max@maxmoulds.org"
 __status__ = "Testing"
-.
