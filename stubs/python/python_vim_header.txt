@@ -28,11 +28,11 @@
 #       if __name__ == '__main__':
 #         main()
 __author__ = "Max Moulds"
-__copyright__ = "Copyright 2014, Max Moulds"
+__copyright__ = "Copyright 2018, Max Moulds"
 __credits__ = ["Max Moulds"]
 __license__ = "Copyrighted, Restricted and All Rights Reserved"
 __version__ = "0.1"
 __maintainer__ = "Max Moulds"
-__email__ = "maximus@maxmoulds.org"
+__email__ = "max@maxmoulds.org"
 __status__ = "Testing"
 .
