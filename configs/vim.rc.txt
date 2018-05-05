@@ -48,14 +48,14 @@ set cindent
 " set wildmenu	
 
 "auto header entry for c files
-"autocmd bufnewfile *.c so ~/Desktop/code/cur/back/vim/vim/c_header.txt
+"autocmd bufnewfile *.c so ~/misc/stubs/c/c_c_vim_header.txt
 "autocmd bufnewfile *.c exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
 "autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
 "autocmd Bufwritepre,filewritepre *.c execute "normal ma"
 "autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified:.*/s/Last Modified:.*/Last Modified: " .strftime("%c")
 "autocmd bufwritepost,filewritepost *.c execute "normal `a"
 
-"autocmd bufnewfile *.h so ~/Desktop/code/cur/back/vim/vim/c_header.txt
+"autocmd bufnewfile *.h so ~/misc/stubs/c/c_h_vim_header.txt
 "autocmd bufnewfile *.h exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
 "autocmd bufnewfile *.h exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
 "autocmd Bufwritepre,filewritepre *.h execute "normal ma"
@@ -63,7 +63,7 @@ set cindent
 "autocmd bufwritepost,filewritepost *.h execute "normal `a"
 
 "auto header entry for tex files"
-"autocmd bufnewfile *.tex so ~/Desktop/code/cur/back/vim/vim/tex_header.txt
+"autocmd bufnewfile *.tex so ~/misc/stubs/tex/tex_vim_header.txt
 "autocmd bufnewfile *.tex exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
 "autocmd bufnewfile *.tex exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
 "autocmd Bufwritepre,filewritepre *.tex execute "normal ma"
@@ -71,7 +71,7 @@ set cindent
 "autocmd bufwritepost,filewritepost *.tex execute "normal `a"
 
 "auto header entry for py files"
-"autocmd bufnewfile *.py so ~/Desktop/code/cur/back/vim/vim/py_header.txt
+"autocmd bufnewfile *.py so ~/misc/stubs/python/python_vim_header.txt
 "autocmd bufnewfile *.py exe "1," . 10 . "g/File Name:.*/s//File Name: " .expand ("%")
 "autocmd bufnewfile *.py exe "1," . 10 . "g/Creation Date:.*/s//Creation Date: " .strftime("%d-%m-%Y")
 "autocmd Bufwritepre,filewritepre *.py execute "normal ma"
