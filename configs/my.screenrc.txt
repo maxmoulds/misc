@@ -1,0 +1,24 @@
+# Save this in ~/.screenrc
+
+# Use bash
+shell /bin/bash
+
+
+export SCREENRC="~/.screenrc"
+
+if [ -d "~/.screen" ]; then
+  # Control will enter here if $DIRECTORY exists.
+  export SCREENDIR="~/.screen"
+fi
+
+# huge scrollback buffer
+defscrollback 5000
+
+# no welcome message
+startup_message off
+
+# mouse tracking allows to switch region focus by clicking
+mousetrack on
+
+# deals with scrollback when exiting....
+altscreen on
